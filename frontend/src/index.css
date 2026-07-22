@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-background text-gray-100 font-sans antialiased overflow-x-hidden;
+    background-image: 
+      radial-gradient(circle at 10% 20%, rgba(59, 130, 246, 0.05) 0%, transparent 40%),
+      radial-gradient(circle at 90% 80%, rgba(139, 92, 246, 0.05) 0%, transparent 40%);
+  }
+
+  /* Custom Neon Scrollbars */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-slate-800 rounded-full border border-slate-700/50 hover:bg-slate-700;
+  }
+}
+
+/* Glassmorphism components */
+.glass-panel {
+  background: rgba(17, 24, 39, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.glass-card {
+  background: rgba(31, 41, 55, 0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.glow-blue {
+  box-shadow: 0 0 15px rgba(59, 130, 246, 0.35);
+}
+
+.glow-emerald {
+  box-shadow: 0 0 15px rgba(16, 185, 129, 0.35);
+}
+
+/* Custom React Flow Node Styling */
+.react-flow__node {
+  @apply rounded-xl border px-4 py-3 font-sans transition-all duration-300 text-xs shadow-lg;
+  background: rgba(17, 24, 39, 0.85);
+  backdrop-filter: blur(8px);
+}
+
+.react-flow__node.selected {
+  @apply ring-2 ring-blue-500 shadow-blue-500/20 border-transparent !important;
+}
+
+.react-flow__handle {
+  @apply w-2.5 h-2.5 bg-blue-500 border border-slate-900 rounded-full !important;
+}
+
+.react-flow__edge-path {
+  @apply stroke-slate-500 stroke-2 !important;
+}
+
+.react-flow__edge.selected .react-flow__edge-path {
+  @apply stroke-blue-500 stroke-[3px] !important;
+}
+
+.react-flow__controls-button {
+  @apply bg-slate-900 border border-slate-800 hover:bg-slate-800 text-slate-300 fill-current !important;
+}

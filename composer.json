@@ -1,0 +1,12 @@
+{
+    "name": "vijaymahes/real-world-simulator-os",
+    "description": "Real-World Simulator OS",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Vijay Mahes",
+            "email": "Vijaypradhap2004@gmail.com"
+        }
+    ],
+    "require": {}
+}
