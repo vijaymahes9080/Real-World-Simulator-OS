@@ -23,6 +23,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+from app.services.sensor_ingestion import sensor_service
+
 # Register REST Routers
 app.include_router(auth.router, prefix="/api")
 app.include_router(projects.router, prefix="/api")
@@ -35,6 +37,11 @@ def read_root():
         "service": "Real-World Simulator OS Backend",
         "api_docs": "/docs"
     }
+
+@app.get("/api/sensors/live")
+def get_live_sensors():
+    """Returns live IoT sensor telemetry for real-time Digital Twin synchronization."""
+    return sensor_service.get_live_telemetry()
 
 # WebSockets Server for Real-Time Simulation Streaming
 @app.websocket("/api/ws/simulate")
@@ -174,13 +181,46 @@ def generate_mock_sim_frame(project_id: str, tick: int) -> dict:
             },
             "alerts": [] if moisture > 15.0 else [{"severity": "critical", "message": "Critical moisture level: crops wilting!"}]
         }
+    elif project_id == "template_climate_agri":
+        gw = max(10.0, 85.0 - (tick * 0.9) + (15.0 * val_sin))
+        yield_idx = min(100.0, 45.0 + (tick * 1.5) - (5.0 if gw < 50 else 0))
+        return {
+            "metrics": {"Groundwater Level (m)": gw, "Crop Yield Index": yield_idx, "Ambient Temp (°C)": 32.0 + (tick * 0.2)},
+            "alerts": [] if gw > 40.0 else [{"severity": "critical", "message": "Aquifer depletion warning! Crop stress detected."}],
+            "agent_messages": [{"sender": "Agronomist AI", "role": "CFO", "content": f"Tick {tick}: Recommending drip irrigation transition."}]
+        }
+    elif project_id == "template_smart_grid":
+        load = 180.0 + (40.0 * val_sin) + (random.random() * 5.0)
+        battery = max(0.0, 450.0 - (tick * 5.0) + (12.0 * max(0.0, math.cos(tick / 3.0))))
+        return {
+            "metrics": {"EV Fleet Demand (MW)": load, "Grid Storage Reserve (MWh)": battery, "Frequency (Hz)": 50.0 + (val_sin * 0.04)},
+            "alerts": [] if load < 210.0 else [{"severity": "warning", "message": "Peak EV fast-charging draw detected!"}],
+            "agent_messages": [{"sender": "Grid Controller AI", "role": "COO", "content": f"Tick {tick}: Throttling commercial charger rates by 15%."}]
+        }
+    elif project_id == "template_supply_chain_fragility":
+        queue = max(10, int(8500 + (tick * 120) - (max(0, tick - 5) * 80)))
+        lead_time = round(18.0 + (tick * 0.4), 1)
+        return {
+            "metrics": {"Port Container Backlog": queue, "Avg Freight Lead Time (Days)": lead_time, "Freight Rate ($/TEU)": 4200 + (tick * 110)},
+            "alerts": [] if queue < 9000 else [{"severity": "warning", "message": "Port bottleneck escalating freight lead times."}],
+            "agent_messages": [{"sender": "Logistics AI", "role": "Risk Manager", "content": f"Tick {tick}: Rerouting 3 vessels to secondary berth."}]
+        }
+    elif project_id == "template_hospital_response":
+        icu = min(120, max(20, int(82 + (tick * 1.8) - (max(0, tick - 12) * 2.2))))
+        er_wait = max(5, int(22 + (tick * 2.1)))
+        return {
+            "metrics": {"ICU Occupancy (Beds)": icu, "ER Wait Time (mins)": er_wait, "Ventilators in Use": min(45, int(icu * 0.35))},
+            "alerts": [] if icu < 110 else [{"severity": "critical", "message": "ICU capacity near 95%! Trigger overflow protocol."}],
+            "agent_messages": [{"sender": "Triage Chief AI", "role": "Medical Officer", "content": f"Tick {tick}: Transferring non-critical cases to step-down ward."}]
+        }
     else:
         # Generic backup
         val = 100.0 + tick * 5.0 + (random.random() * 5.0)
         return {
             "metrics": {
                 "Operational Status": val,
-                "System Health Index": 98.5 - (tick * 0.1)
+                "System Health Index": round(98.5 - (tick * 0.1), 2)
             },
-            "alerts": []
+            "alerts": [],
+            "agent_messages": [{"sender": "System Autonomous Engine", "role": "System", "content": f"Tick {tick}: Baseline simulation run nominal."}]
         }

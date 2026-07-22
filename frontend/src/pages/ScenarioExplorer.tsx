@@ -131,7 +131,7 @@ export default function ScenarioExplorer() {
             </div>
 
             <div className="flex-1 relative">
-              <Line type="bar" data={getChartData()} options={chartOptions} />
+              <Line data={getChartData()} options={chartOptions} />
             </div>
           </div>
 

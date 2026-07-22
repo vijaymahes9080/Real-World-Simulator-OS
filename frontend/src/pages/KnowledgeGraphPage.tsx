@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useStore } from "../hooks/useStore";
-import { Network, Activity, HelpCircle, AlertCircle, ArrowRight, Zap, Target } from "lucide-react";
+import { Network, Activity, HelpCircle, ArrowRight, Zap, Target } from "lucide-react";
 
 interface Node {
   id: string;

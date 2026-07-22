@@ -17,7 +17,7 @@ export interface Project {
 
 export interface TelemetryPoint {
   tick: number;
-  time: float;
+  time: number;
   metric_name: string;
   metric_value: number;
   entity_id: string;

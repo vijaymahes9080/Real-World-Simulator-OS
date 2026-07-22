@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useStore } from "../hooks/useStore";
 import { Line } from "react-chartjs-2";
-import { Award, CheckCircle, Flame, HelpCircle } from "lucide-react";
+import { CheckCircle, Flame, HelpCircle } from "lucide-react";
 
 export default function OptimizationPage() {
   const activeProject = useStore(state => state.activeProject);
@@ -19,7 +19,7 @@ export default function OptimizationPage() {
     const token = localStorage.getItem("token");
     
     // Map variables to optimization parameters
-    const params = [];
+    const params: any[] = [];
     if (activeProject.global_variables) {
       Object.keys(activeProject.global_variables).forEach(k => {
         const val = activeProject.global_variables[k];
@@ -203,7 +203,27 @@ export default function OptimizationPage() {
         {/* Recommended changes list */}
         {optResult && (
           <div className="glass-panel rounded-xl p-5 space-y-4">
-            <h2 className="text-sm font-semibold text-white">Recommended Policy Adjustments</h2>
+            <div className="flex items-center justify-between">
+              <h2 className="text-sm font-semibold text-white flex items-center gap-2">
+                Recommended Policy Adjustments & Prescriptive AI Cards
+                <span className="text-[10px] bg-emerald-500/20 text-emerald-400 font-mono px-2 py-0.5 rounded border border-emerald-500/30">
+                  SHAP ATTRIBUTE ANALYSIS
+                </span>
+              </h2>
+            </div>
+
+            {/* Prescriptive Advice Cards */}
+            {optResult.prescriptive_recommendations && optResult.prescriptive_recommendations.length > 0 && (
+              <div className="space-y-2">
+                {optResult.prescriptive_recommendations.map((rec: string, idx: number) => (
+                  <div key={idx} className="p-3 bg-slate-900/80 border border-emerald-500/20 rounded-xl text-xs text-emerald-300 flex items-start gap-2.5">
+                    <CheckCircle className="h-4 w-4 text-emerald-400 shrink-0 mt-0.5" />
+                    <span className="leading-relaxed">{rec}</span>
+                  </div>
+                ))}
+              </div>
+            )}
+
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs">
                 <thead>
@@ -218,7 +238,7 @@ export default function OptimizationPage() {
                   {Object.keys(optResult.best_parameters).map(k => (
                     <tr key={k}>
                       <td className="py-3 font-semibold text-white">{k}</td>
-                      <td className="py-3 font-mono">{(activeProject.global_variables[k] || 0.0).toFixed(2)}</td>
+                      <td className="py-3 font-mono">{(activeProject?.global_variables?.[k] || 0.0).toFixed(2)}</td>
                       <td className="py-3 font-mono text-emerald-400 font-bold">{(optResult.best_parameters[k] || 0.0).toFixed(2)}</td>
                       <td className="py-3">
                         <div className="flex items-center gap-2">

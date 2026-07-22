@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import { useStore, Project } from "../hooks/useStore";
+import { useStore } from "../hooks/useStore";
 import { Line } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -12,6 +12,10 @@ import {
   Legend,
 } from "chart.js";
 import { Play, Pause, SkipForward, RotateCcw, AlertTriangle, Send, Sparkles, Sliders } from "lucide-react";
+import SpatialCanvas from "../components/SpatialCanvas";
+import MultiAgentHub from "../components/MultiAgentHub";
+import TimeMachineScrubber from "../components/TimeMachineScrubber";
+import LiveSensorFeed from "../components/LiveSensorFeed";
 
 // Register ChartJS modules
 ChartJS.register(
@@ -311,18 +315,36 @@ export default function Dashboard() {
         )}
       </div>
 
-      {/* Main Graph & Live Alerts Area */}
+      {/* Main Graph, Spatial Viewport & Innovation Suite */}
       <div className="xl:col-span-3 space-y-6">
+        {/* Scenario Time Machine Scrubber */}
+        <TimeMachineScrubber
+          currentTick={telemetry.length > 0 ? telemetry[telemetry.length - 1].tick : 0}
+          isPlaying={isSimulating}
+          onPlayPause={() => (isSimulating ? pauseWebSocketSim() : startWebSocketSim())}
+          onStep={() => stepWebSocketSim()}
+          onSeek={(t) => console.log("Seek to tick", t)}
+        />
+
+        {/* 3D Spatial Canvas & Multi-Agent Crisis Hub Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <SpatialCanvas activeTick={telemetry.length > 0 ? telemetry[telemetry.length - 1].tick : 0} />
+          <MultiAgentHub activeTick={telemetry.length > 0 ? telemetry[telemetry.length - 1].tick : 0} />
+        </div>
+
+        {/* Live IoT Telemetry Feed */}
+        <LiveSensorFeed />
+
         {/* Dynamic Telemetry Graph */}
         <div className="glass-panel rounded-xl p-5 h-[340px] flex flex-col">
-          <h2 className="text-sm font-semibold text-white mb-4">Real-Time Simulation Telemetry (DuckDB Data Stream)</h2>
+          <h2 className="text-sm font-semibold text-white mb-4">Real-Time Simulation Telemetry Stream</h2>
           <div className="flex-1 relative">
             {telemetry.length > 0 ? (
               <Line data={getChartData()} options={chartOptions} />
             ) : (
               <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-xs text-gray-500">
                 <Sliders className="h-8 w-8 text-slate-700 mb-2 animate-bounce" />
-                No simulation telemetry active. Click Play button on the left to begin streaming results.
+                No simulation telemetry active. Click Play button above to begin streaming results.
               </div>
             )}
           </div>

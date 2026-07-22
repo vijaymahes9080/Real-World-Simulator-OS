@@ -625,6 +625,111 @@ def get_predefined_projects() -> List[Dict[str, Any]]:
         }
     }
 
+    # 9. Climate Resilience & Agri-Tech Kit
+    climate_agri_template = {
+        "id": "template_climate_agri",
+        "name": "Climate Resilience & Food Security Simulator",
+        "description": "Models heatwaves, groundwater depletion, carbon offsets, and crop yield under extreme weather shocks.",
+        "domain": "agriculture",
+        "layout": {
+            "nodes": [
+                {"id": "n1", "type": "stock", "position": {"x": 100, "y": 150}, "data": {"label": "Groundwater Table (m)"}},
+                {"id": "n2", "type": "flow", "position": {"x": 300, "y": 150}, "data": {"label": "Aquifer Recharge"}},
+                {"id": "n3", "type": "stock", "position": {"x": 500, "y": 150}, "data": {"label": "Crop Yield Index"}}
+            ],
+            "edges": [{"id": "e1", "source": "n1", "target": "n3", "label": "irrigation supply"}]
+        },
+        "global_variables": {"ambient_temp": 32.0, "co2_ppm": 420.0, "rainfall_mm": 12.0},
+        "agents": [],
+        "rules": [],
+        "system_dynamics": {
+            "stocks": {
+                "groundwater": {"id": "groundwater", "name": "Aquifer Level", "initial_value": 85.0, "inflows": ["recharge"], "outflows": ["irrigation_pumping"]}
+            },
+            "flows": {
+                "recharge": {"id": "recharge", "name": "Rainfall Infiltration", "expression": "constants.rainfall_mm * 0.8"},
+                "irrigation_pumping": {"id": "irrigation_pumping", "name": "Agricultural Pumping", "expression": "15.0"}
+            },
+            "auxiliaries": {},
+            "constants": {"rainfall_mm": 12.0}
+        }
+    }
+
+    # 10. Smart Grid & EV Infrastructure Kit
+    smart_grid_template = {
+        "id": "template_smart_grid",
+        "name": "Smart Power Grid & EV Charger Load Simulator",
+        "description": "Simulates transformer load, renewable energy generation spikes, EV fast-charging demand, and blackout risks.",
+        "domain": "smart_city",
+        "layout": {
+            "nodes": [
+                {"id": "n1", "type": "stock", "position": {"x": 150, "y": 150}, "data": {"label": "Grid Battery Reserve (MWh)"}},
+                {"id": "n2", "type": "flow", "position": {"x": 350, "y": 150}, "data": {"label": "EV Charging Draw (MW)"}}
+            ],
+            "edges": []
+        },
+        "global_variables": {"ev_fleet_size": 4500, "solar_capacity_mw": 120.0, "grid_frequency": 50.0},
+        "agents": [],
+        "rules": [],
+        "system_dynamics": {
+            "stocks": {
+                "battery_reserve": {"id": "battery_reserve", "name": "Substation Storage", "initial_value": 450.0, "inflows": ["solar_inflow"], "outflows": ["ev_draw"]}
+            },
+            "flows": {
+                "solar_inflow": {"id": "solar_inflow", "name": "Solar Power Input", "expression": "75.0"},
+                "ev_draw": {"id": "ev_draw", "name": "EV Fleet Power Demand", "expression": "60.0"}
+            },
+            "auxiliaries": {},
+            "constants": {}
+        }
+    }
+
+    # 11. Global Supply Chain Fragility Kit
+    supply_chain_fragility_template = {
+        "id": "template_supply_chain_fragility",
+        "name": "Global Maritime Supply Chain Bottleneck Simulator",
+        "description": "Simulates port congestion, container shortages, canal blockages, and retail inventory bullwhip effects.",
+        "domain": "supply_chain",
+        "layout": {},
+        "global_variables": {"port_congestion_index": 7.8, "freight_rate_usd": 4200.0, "lead_time_days": 18.0},
+        "agents": [],
+        "rules": [],
+        "system_dynamics": {
+            "stocks": {
+                "port_backlog": {"id": "port_backlog", "name": "Containers Waiting at Port", "initial_value": 8500.0, "inflows": ["ship_arrivals"], "outflows": ["customs_cleared"]}
+            },
+            "flows": {
+                "ship_arrivals": {"id": "ship_arrivals", "name": "Inbound Cargo Vessels", "expression": "1200.0"},
+                "customs_cleared": {"id": "customs_cleared", "name": "Unloaded & Processed", "expression": "950.0"}
+            },
+            "auxiliaries": {},
+            "constants": {}
+        }
+    }
+
+    # 12. Hospital Emergency Response Kit
+    hospital_response_template = {
+        "id": "template_hospital_response",
+        "name": "Hospital Emergency Triage & Pandemic Bed Simulator",
+        "description": "Models ICU admission rates, nurse-to-patient ratios, ventilator reserves, and emergency room queue dynamics.",
+        "domain": "hospital",
+        "layout": {},
+        "global_variables": {"icu_beds_total": 120, "nurse_staff_on_shift": 45, "infection_r0": 2.4},
+        "agents": [],
+        "rules": [],
+        "system_dynamics": {
+            "stocks": {
+                "icu_occupancy": {"id": "icu_occupancy", "name": "Occupied ICU Beds", "initial_value": 82.0, "inflows": ["admissions"], "outflows": ["discharges"]}
+            },
+            "flows": {
+                "admissions": {"id": "admissions", "name": "ER Admissions", "expression": "14.0"},
+                "discharges": {"id": "discharges", "name": "Recovered Discharges", "expression": "11.0"}
+            },
+            "auxiliaries": {},
+            "constants": {}
+        }
+    }
+
     templates.extend([
         startup_template,
         city_template,
@@ -633,7 +738,11 @@ def get_predefined_projects() -> List[Dict[str, Any]]:
         retail_template,
         hospital_template,
         supply_chain_template,
-        disaster_template
+        disaster_template,
+        climate_agri_template,
+        smart_grid_template,
+        supply_chain_fragility_template,
+        hospital_response_template
     ])
     
     return templates
