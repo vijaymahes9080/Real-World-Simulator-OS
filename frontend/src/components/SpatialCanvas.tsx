@@ -1,6 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { Maximize2, RotateCcw, Activity, Cpu } from "lucide-react";
 
+/**
+ * Node3D represents a spatial node coordinate in the 3D Digital Twin viewport.
+ */
 interface Node3D {
   id: string;
   label: string;
@@ -15,18 +18,27 @@ interface Node3D {
   val: number;
 }
 
+/**
+ * Edge3D represents a directed energy/material connection between two 3D spatial nodes.
+ */
 interface Edge3D {
   source: string;
   target: string;
   label: string;
 }
 
+/**
+ * Component props for SpatialCanvas viewport.
+ */
 interface SpatialCanvasProps {
   nodes?: Node3D[];
   edges?: Edge3D[];
   activeTick?: number;
 }
 
+/**
+ * SpatialCanvas renders a high-performance 3D spatial graph viewport using HTML5 Canvas.
+ */
 export default function SpatialCanvas({ activeTick = 0 }: SpatialCanvasProps) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [isRotating, setIsRotating] = useState<boolean>(true);
