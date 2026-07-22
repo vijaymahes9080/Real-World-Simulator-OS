@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import { Bot, ShieldCheck, Sparkles, Send } from "lucide-react";
 
+/**
+ * AgentMessage represents a structured communication packet from an executive AI agent.
+ */
 interface AgentMessage {
   id: string;
   sender: string;
@@ -11,11 +14,17 @@ interface AgentMessage {
   vote?: "APPROVE" | "REJECT" | "DEFER";
 }
 
+/**
+ * Component props for MultiAgentHub feed.
+ */
 interface MultiAgentHubProps {
   activeTick?: number;
   simMessages?: any[];
 }
 
+/**
+ * MultiAgentHub renders a live debate feed between autonomous LLM decision agents.
+ */
 export default function MultiAgentHub({ activeTick = 0, simMessages = [] }: MultiAgentHubProps) {
   const [messages, setMessages] = useState<AgentMessage[]>([
     {
