@@ -1,0 +1,138 @@
+# ==============================================================================
+# Real-World Simulator OS — .gitignore
+# ==============================================================================
+
+# ─── Python ───────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+*.pyd
+*.pdb
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+.installed.cfg
+MANIFEST
+
+# ─── Virtual Environments ─────────────────────────────────────────────────────
+venv/
+.venv/
+env/
+.env/
+backend/venv/
+backend/.venv/
+ENV/
+
+# ─── Environment & Secrets ────────────────────────────────────────────────────
+.env
+.env.local
+.env.*.local
+.env.production
+.env.development
+*.secret
+secrets.json
+config.local.*
+
+# ─── Testing & Coverage ───────────────────────────────────────────────────────
+.pytest_cache/
+.coverage
+htmlcov/
+coverage.xml
+*.cover
+.tox/
+nosetests.xml
+test-results/
+
+# ─── Database & Storage ───────────────────────────────────────────────────────
+*.db
+*.sqlite
+*.sqlite3
+*.db-shm
+*.db-wal
+data/
+db/
+
+# ─── Node.js / Frontend ───────────────────────────────────────────────────────
+node_modules/
+frontend/node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# ─── Build Outputs ────────────────────────────────────────────────────────────
+frontend/dist/
+frontend/build/
+dist/
+build/
+out/
+.next/
+.nuxt/
+.svelte-kit/
+
+# ─── TypeScript ───────────────────────────────────────────────────────────────
+*.tsbuildinfo
+
+# ─── Vite Cache ───────────────────────────────────────────────────────────────
+.vite/
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
+
+# ─── IDEs & Editors ───────────────────────────────────────────────────────────
+.vscode/
+!.vscode/extensions.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.swp
+*~
+.project
+.classpath
+.settings/
+*.iml
+
+# ─── OS System Files ──────────────────────────────────────────────────────────
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+$RECYCLE.BIN/
+
+# ─── Logs ─────────────────────────────────────────────────────────────────────
+logs/
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# ─── Docker ───────────────────────────────────────────────────────────────────
+.dockerenv
+
+# ─── Jupyter Notebooks ────────────────────────────────────────────────────────
+.ipynb_checkpoints
+
+# ─── ML / AI Artifacts ────────────────────────────────────────────────────────
+*.pkl
+*.joblib
+*.h5
+*.model
+models/
+checkpoints/
+
+# ─── Misc ─────────────────────────────────────────────────────────────────────
+.cache/
+.parcel-cache/
+.turbo/
+*.bak
+*.tmp
+*.temp
