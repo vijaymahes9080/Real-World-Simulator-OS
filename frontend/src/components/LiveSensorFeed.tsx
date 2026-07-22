@@ -1,10 +1,16 @@
 import { useEffect, useState } from "react";
 import { Radio, RefreshCw, CheckCircle2, Wifi } from "lucide-react";
 
+/**
+ * Component props for LiveSensorFeed telemetry streamer.
+ */
 interface LiveSensorFeedProps {
   onSyncTelemetry?: (metrics: Record<string, number>) => void;
 }
 
+/**
+ * LiveSensorFeed renders real-time physical IoT sensor telemetry metrics.
+ */
 export default function LiveSensorFeed({ onSyncTelemetry }: LiveSensorFeedProps) {
   const [telemetry, setTelemetry] = useState<any>(null);
   const [loading, setLoading] = useState<boolean>(false);
