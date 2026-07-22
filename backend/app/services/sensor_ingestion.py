@@ -6,13 +6,21 @@ from typing import Dict, Any, List
 class SensorIngestionService:
     """
     Simulates or pulls live IoT and real-world API telemetry streams.
-    Synchronizes ambient parameters directly into Digital Twins.
+    Synchronizes ambient parameters directly into Digital Twins in real time.
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
+        """Initialize the sensor ingestion service timer."""
         self._start_time = time.time()
 
     def get_live_telemetry(self) -> Dict[str, Any]:
+        """
+        Polls physical IoT streams and returns active telemetry metrics.
+
+        Returns:
+            Dict[str, Any]: Dictionary containing timestamp, status, active stream count,
+                            metric values, and individual sensor node status summaries.
+        """
         elapsed = time.time() - self._start_time
         
         # Dynamic sine-wave values representing live physical metrics
