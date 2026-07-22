@@ -25,7 +25,6 @@ export default function App() {
             <Terminal className="h-6 w-6 text-blue-500 animate-pulse" />
             <div>
               <span className="font-bold text-white text-sm tracking-wide">Real-World Simulator OS</span>
-              <span className="text-[10px] bg-blue-500/10 border border-blue-500/30 text-blue-400 rounded-full px-2 py-0.5 ml-2 font-mono font-bold">V1.0</span>
             </div>
           </div>
           
