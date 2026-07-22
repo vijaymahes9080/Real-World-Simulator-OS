@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { Play, Pause, RotateCcw, SkipBack, SkipForward, Bookmark, Volume2, History, GitBranch } from "lucide-react";
 
+/**
+ * Component props for TimeMachineScrubber timeline controls.
+ */
 interface TimeMachineScrubberProps {
   currentTick: number;
   maxTicks?: number;
@@ -11,6 +14,9 @@ interface TimeMachineScrubberProps {
   onBookmarkBranch?: (tick: number) => void;
 }
 
+/**
+ * TimeMachineScrubber enables interactive playback control, rewind, fast-forward, and counterfactual branch point creation.
+ */
 export default function TimeMachineScrubber({
   currentTick,
   maxTicks = 100,
