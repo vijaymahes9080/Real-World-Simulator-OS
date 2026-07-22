@@ -19,6 +19,14 @@
 
 ---
 
+<div align="center">
+
+![Hero Banner](docs/images/hero_banner.png)
+
+</div>
+
+---
+
 ## 🎯 What is Real-World Simulator OS?
 
 **Real-World Simulator OS** is an open-source, AI-powered platform that creates **living digital twins** of real-world systems. Model a startup's cash runway, a city's power grid, a hospital's ICU capacity, or a global supply chain — then run Monte Carlo simulations, deploy autonomous AI agents, and get prescriptive policy recommendations — all in real time.
@@ -30,47 +38,83 @@
 ## ✨ Features
 
 ### 🤖 Autonomous Multi-Agent AI Engine
-- Deploy virtual executive agents (**CFO, COO, Risk Manager, Logistics Lead**) that autonomously negotiate crisis responses.
-- Real-time debate feeds with consensus confidence scoring.
+
+<div align="center">
+
+![Multi-Agent Hub](docs/images/multi_agent_hub.png)
+
+</div>
+
+Deploy virtual executive agents (**CFO, COO, Risk Manager, Medical/Logistics Leads**) that autonomously negotiate crisis responses in real time.
+- Real-time debate feed with consensus confidence scoring (shown above).
+- Dynamic vote tracking: `APPROVE`, `DEFER`, `REJECT`.
 - Inject custom crisis directives into the agent loop interactively.
 
-### 🌌 Spatial 3D Digital Twin Viewport
-- Interactive 3D particle graph canvas with orbital rotation controls.
-- Glowing energy pulse animations along live connections.
-- Node status indicators: **Nominal / Warning / Critical Stress**.
+---
 
-### ⏳ Scenario Time Machine & Storytelling Mode
-- Scrub simulation ticks forward and backward on a timeline slider.
-- Create **counterfactual branch points** (bookmarks) to test alternative decision paths.
-- Synthesized Web Audio sound cues for state transitions.
+### 🌌 Spatial 3D Digital Twin Viewport
+
+<div align="center">
+
+![3D Spatial Canvas](docs/images/spatial_3d_canvas.png)
+
+</div>
+
+An interactive 3D particle graph canvas renders your system architecture as a **living spatial network**.
+- Orbital camera with auto-rotation controls.
+- Glowing energy pulse animations along connections.
+- Node state indicators: **🟢 Nominal / 🟡 Warning / 🔴 Critical Stress**.
+
+---
+
+### ⏳ Scenario Time Machine & 🧠 Prescriptive Policy Optimizer
+
+<div align="center">
+
+![Time Machine & Optimizer](docs/images/time_machine_optimizer.png)
+
+</div>
+
+- **Time Machine:** Scrub simulation ticks forward and backward. Create **counterfactual branch points** to test alternative decision paths with Web Audio cue alerts.
+- **Prescriptive Optimizer:** Genetic algorithm solver with SHAP feature attribution generates actionable **AI Policy Cards** with ranked parameter recommendations.
+
+---
+
+### 🌍 Domain-Specific Simulation Kits
+
+<div align="center">
+
+![Simulation Kits](docs/images/simulation_kits.png)
+
+</div>
+
+| Kit | Domain | Key Metrics |
+|-----|--------|-------------|
+| 🌱 Climate Resilience & Food Security | AgriTech | Groundwater Level, Crop Yield Index, Ambient Temp |
+| ⚡ Smart Grid & EV Infrastructure | Energy | EV Demand (MW), Battery Reserve (MWh), Hz |
+| 📦 Maritime Supply Chain | Global Trade | Port Backlog, Lead Time (Days), Freight Rate |
+| 🏥 Hospital Emergency Triage | Public Health | ICU Beds Occupied, ER Wait Time, Ventilators |
+| 🚀 Startup Growth & Run Rate | Entrepreneurship | Cash Reserves, Monthly Revenue, Burn Rate |
+| 🏙️ Smart City Power Grid | Urban Infrastructure | Grid Electricity, Solar Input, City Load |
+| 🌾 Crop Yield & Agriculture | AgriTech | Soil Moisture, Biomass, Precipitation |
+| 🎓 University Campus | Education | Enrollment, Budget, Research Output |
+| 🛒 Retail Inventory | Commerce | Stock Level, Order Rate, Demand Surge |
+| 🏥 Hospital Resource Allocation | Healthcare | Bed Occupancy, Nurse Shifts, Wait Times |
+| 🚢 Logistics & Supply Chain | Logistics | Transit Days, Warehouse Stock, Order Rate |
+| 🌊 Disaster Response & Evacuation | Emergency Mgmt | Flood Zones, Rescue Capacity, Evacuation Speed |
+
+---
 
 ### 🛰️ Live IoT & Sensor Data Ingestor
-- Real-world telemetry polling via `/api/sensors/live`.
-- Streams: Ambient temperature, grid frequency, solar irradiance, city traffic, port backlog, and hospital ICU occupancy.
-- Auto-sync at configurable intervals or manual poll.
 
-### 🧠 Generative Prescriptive Policy Optimizer
-- Genetic algorithm solver with SHAP feature correlation attribution.
-- Generates actionable **Prescriptive AI Policy Cards** with ranked parameter recommendations.
-- Multi-objective optimization with convergence visualization.
+Real-world telemetry is polled via `/api/sensors/live` and streamed directly into your simulation's Digital Twin baseline:
 
-### 🌍 12 Pre-Built Domain Simulation Kits
-| Kit | Domain |
-|-----|--------|
-| Startup Growth & Run Rate | Entrepreneurship |
-| Smart City Power Grid | Urban Infrastructure |
-| Crop Yield & Agriculture | AgriTech |
-| University Campus Dynamics | Education |
-| Retail Inventory Optimization | Commerce |
-| Hospital Emergency Triage | Healthcare |
-| Global Supply Chain | Logistics |
-| Disaster Response & Evacuation | Emergency Management |
-| ⭐ Climate Resilience & Food Security | Climate Tech |
-| ⭐ Smart Grid & EV Infrastructure | Energy |
-| ⭐ Maritime Supply Chain Fragility | Global Trade |
-| ⭐ Pandemic Bed Allocation | Public Health |
-
-> ⭐ = New in Innovation Suite v1.0
+| Sensor | Stream |
+|--------|--------|
+| `IOT-TEMP-904` | Ambient Temperature (°C) |
+| `GRID-FREQ-012` | Power Grid Frequency (Hz) |
+| `PORT-QUEUE-301` | Port Container Backlog (units) |
+| `MED-ICU-882` | Hospital ICU Occupancy (%) |
 
 ---
 
@@ -81,26 +125,17 @@ Real-World Simulator OS/
 ├── backend/                    # Python FastAPI Server
 │   ├── app/
 │   │   ├── api/               # REST API Routes (auth, projects, runs)
-│   │   ├── core/              # Security & Auth (JWT)
-│   │   ├── db/                # SQLite via SQLAlchemy
 │   │   ├── engines/           # Simulation Engines
 │   │   │   ├── agent_engine.py         # Multi-Agent Behavioral Simulation
 │   │   │   ├── des_engine.py           # Discrete Event Simulation
 │   │   │   ├── monte_carlo_engine.py   # Probabilistic Monte Carlo
 │   │   │   └── system_dynamics.py      # System Dynamics (Stocks & Flows)
 │   │   ├── services/          # AI & Platform Services
-│   │   │   ├── digital_twin.py         # Digital Twin Synchronizer
-│   │   │   ├── explainable_ai.py       # XAI / SHAP Analysis
-│   │   │   ├── forecasting.py          # Predictive Forecasting
-│   │   │   ├── knowledge_graph.py      # Causal Relationship Graph
-│   │   │   ├── llm_service.py          # LLM AI Co-Pilot
 │   │   │   ├── optimization.py         # GA Optimizer + Prescriptive Engine
 │   │   │   ├── predefined_templates.py # 12 Domain Simulation Kits
-│   │   │   ├── rule_engine.py          # Business Rule Execution
-│   │   │   └── sensor_ingestion.py     # Live IoT Telemetry Ingestor ⭐
+│   │   │   ├── sensor_ingestion.py     # Live IoT Telemetry Ingestor ⭐
+│   │   │   └── ...
 │   │   └── main.py            # FastAPI App + WebSocket Streamer
-│   ├── tests/                 # Pytest Suite
-│   └── requirements.txt
 │
 ├── frontend/                  # React + TypeScript + Vite UI
 │   ├── src/
@@ -109,26 +144,13 @@ Real-World Simulator OS/
 │   │   │   ├── MultiAgentHub.tsx       # Autonomous Agent Debate Feed
 │   │   │   ├── TimeMachineScrubber.tsx # Scenario Timeline Scrubber
 │   │   │   └── LiveSensorFeed.tsx      # Live IoT Telemetry Widget
-│   │   ├── pages/             # Application Pages
-│   │   │   ├── Dashboard.tsx           # Main Simulation Console
-│   │   │   ├── SystemBuilder.tsx       # Architecture Node Designer
-│   │   │   ├── ScenarioExplorer.tsx    # Monte Carlo Scenario Analysis
-│   │   │   ├── KnowledgeGraphPage.tsx  # Causal Graph Viewer
-│   │   │   └── OptimizationPage.tsx    # GA Optimizer + Policy Cards
-│   │   └── hooks/
-│   │       └── useStore.ts    # Zustand Global State
-│   └── package.json
+│   │   └── pages/             # Application Pages
 │
-├── scripts/                   # Startup Scripts
-│   ├── setup_windows.ps1      # Windows Setup
-│   ├── setup_unix.sh          # Unix/macOS Setup
-│   ├── run_windows.ps1        # Windows Runner
-│   └── run_unix.sh            # Unix/macOS Runner
-│
-├── composer.json              # Project Metadata
-├── .gitignore
+├── docs/images/               # README Images & Visuals
+├── scripts/                   # Setup & Run Scripts
+├── README.md
 ├── LICENSE
-└── README.md
+└── .gitignore
 ```
 
 ---
@@ -137,19 +159,13 @@ Real-World Simulator OS/
 
 ### Prerequisites
 - Python **3.10+**
-- Node.js **18+**
-- npm **9+**
+- Node.js **18+** & npm **9+**
 
 ### Windows
 ```powershell
-# Clone the repository
 git clone https://github.com/vijaymahes9080/Real-World-Simulator-OS.git
 cd "Real-World Simulator OS"
-
-# Run automated setup
 ./scripts/setup_windows.ps1
-
-# Start both servers
 ./scripts/run_windows.ps1
 ```
 
@@ -157,37 +173,29 @@ cd "Real-World Simulator OS"
 ```bash
 git clone https://github.com/vijaymahes9080/Real-World-Simulator-OS.git
 cd "Real-World Simulator OS"
-
 chmod +x scripts/setup_unix.sh scripts/run_unix.sh
-./scripts/setup_unix.sh
-./scripts/run_unix.sh
+./scripts/setup_unix.sh && ./scripts/run_unix.sh
 ```
 
 ### Manual Setup
 ```bash
 # Backend
-cd backend
-python -m venv venv
+cd backend && python -m venv venv
 source venv/bin/activate   # Windows: venv\Scripts\activate
 pip install -r requirements.txt
 uvicorn app.main:app --reload --port 8000
 
 # Frontend (new terminal)
-cd frontend
-npm install
-npm run dev
+cd frontend && npm install && npm run dev
 ```
 
-**Access the application:**
-- 🖥️ **Frontend UI**: http://localhost:5173
-- 📡 **Backend API**: http://localhost:8000
-- 📚 **API Docs (Swagger)**: http://localhost:8000/docs
+| Service | URL |
+|---------|-----|
+| 🖥️ Frontend UI | http://localhost:5173 |
+| 📡 Backend API | http://localhost:8000 |
+| 📚 API Swagger Docs | http://localhost:8000/docs |
 
-**Default login credentials:**
-| Username | Password | Role |
-|----------|----------|------|
-| `admin` | `admin123` | Admin |
-| `analyst` | `analyst123` | Analyst |
+**Default credentials:** `admin` / `admin123` or `analyst` / `analyst123`
 
 ---
 
@@ -195,9 +203,8 @@ npm run dev
 
 | Endpoint | Method | Description |
 |----------|--------|-------------|
-| `/api/auth/login` | POST | Authenticate and receive JWT token |
+| `/api/auth/login` | POST | Authenticate & receive JWT token |
 | `/api/projects` | GET | List all simulation projects |
-| `/api/projects/{id}` | GET | Get project details |
 | `/api/projects/{id}/run` | POST | Start simulation run |
 | `/api/projects/{id}/optimize` | POST | Run GA optimizer |
 | `/api/sensors/live` | GET | Live IoT telemetry stream |
@@ -208,8 +215,7 @@ npm run dev
 ## 🧪 Running Tests
 
 ```bash
-cd backend
-python -m pytest tests/ -v
+cd backend && python -m pytest tests/ -v
 ```
 
 ---
@@ -219,31 +225,26 @@ python -m pytest tests/ -v
 | Layer | Technology |
 |-------|-----------|
 | **Frontend** | React 18, TypeScript, Vite, Tailwind CSS |
-| **Charting** | Chart.js, React-Chartjs-2 |
 | **State** | Zustand |
-| **Graph** | ReactFlow |
+| **3D Viewport** | HTML5 Canvas (custom 3D projection engine) |
 | **Backend** | Python 3.12, FastAPI |
 | **Simulation** | NumPy, SciPy, SimPy |
-| **AI/ML** | Custom GA Solver, SHAP Attribution, LLM Integration |
-| **Database** | SQLite (SQLAlchemy ORM) |
+| **AI/ML** | Custom GA Solver, SHAP Attribution |
+| **Database** | SQLite via SQLAlchemy |
 | **Auth** | JWT (python-jose) |
 | **Real-Time** | WebSockets (asyncio) |
-| **3D Viewport** | HTML5 Canvas (2.5D projection engine) |
 
 ---
 
 ## 🤝 Contributing
 
-Contributions are welcome! Here's how:
-
 1. Fork the repository.
 2. Create your feature branch: `git checkout -b feat/my-new-feature`
-3. Commit your changes: `git commit -m 'feat: add some feature'`
-4. Push to the branch: `git push origin feat/my-new-feature`
+3. Commit: `git commit -m 'feat: add some feature'`
+4. Push: `git push origin feat/my-new-feature`
 5. Submit a Pull Request.
 
 ### Commit Convention
-This project follows [Conventional Commits](https://www.conventionalcommits.org/):
 - `feat:` — New feature
 - `fix:` — Bug fix
 - `docs:` — Documentation updates
